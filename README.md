@@ -73,4 +73,4 @@ To better configure the development process and project easy to run, we configur
 
     `"watch": "babel src --out-dir public --watch --verbose"`
 
-![Ch2 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme-images/chapter2.png)
+![Ch2 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter2.png)
