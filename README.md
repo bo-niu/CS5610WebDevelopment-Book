@@ -1,6 +1,14 @@
 # BoNiu-Book
 Work through Pro MERN Stack 2nd Ed
 
+
+## Chapter 3
+
+### Summary
+
+In this chapter, I learned how to reorganize custom elements such as list, table, row into classes, so that I can dynamically create or delete it. In this chapter, the programming logic changed. If I want to add some rows to a table. What I do is that I pass all the row data to the object of the table class. table class will then create object of the row class until there is nothing to be added. The most fancy part is that to make the code more readable and understandable, the React created so convenient features in the JSX to mix Javascript code with html code. By React syntax, it looks like that we are creating our own html tag. For example, the table I created in this chapter is wrapped in the `<IssueTable />`. And inside IssueTable object can be another user-defined html element, which are some `<IssueRow />` in this chapter. When React is passing data from parent user-defined html tag to its child html, the html attribute part is used. Therefore, when I created a new IssueRow using `<IssueRow key={issue.id} rowStyle={rowStyle} issue={issue}/>`, all of them can be accessed in the child class's render() method like `const issue = this.props.issue;`. The other method that can pass data to child user-defined html tag is through filling the inner part between the opening tag and closing tag, ex. `<IssueRow rowStyle={rowStyle} issue_id={1}>data passing to child</IssueRow>`. The child html can access the data by call `<td>{this.props.children}</td>` in its render methods.
+
+![Ch3 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter3.png)
 ## Chapter 2
 
 ### Terminology and My Understanding
