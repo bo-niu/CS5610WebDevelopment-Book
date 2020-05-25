@@ -22,7 +22,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var issues = [{
+var initialIssues = [{
   id: 1,
   status: 'New',
   owner: 'Ravan',
@@ -54,31 +54,74 @@ var IssueFilter = /*#__PURE__*/function (_React$Component) {
   _createClass(IssueFilter, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, "This is a placeholder for the issue filter");
+      return /*#__PURE__*/React.createElement("div", null, "This is a placeholder for the issue filter.");
     }
   }]);
 
   return IssueFilter;
 }(React.Component);
 
-var IssueTable = /*#__PURE__*/function (_React$Component2) {
-  _inherits(IssueTable, _React$Component2);
+var IssueRow = /*#__PURE__*/function (_React$Component2) {
+  _inherits(IssueRow, _React$Component2);
 
-  var _super2 = _createSuper(IssueTable);
+  var _super2 = _createSuper(IssueRow);
 
-  function IssueTable() {
-    _classCallCheck(this, IssueTable);
+  function IssueRow() {
+    _classCallCheck(this, IssueRow);
 
     return _super2.apply(this, arguments);
   }
 
-  _createClass(IssueTable, [{
+  _createClass(IssueRow, [{
     key: "render",
     value: function render() {
-      var issueRows = issues.map(function (issue) {
+      var issue = this.props.issue;
+      return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.title));
+    }
+  }]);
+
+  return IssueRow;
+}(React.Component);
+
+var IssueTable = /*#__PURE__*/function (_React$Component3) {
+  _inherits(IssueTable, _React$Component3);
+
+  var _super3 = _createSuper(IssueTable);
+
+  function IssueTable() {
+    var _this;
+
+    _classCallCheck(this, IssueTable);
+
+    _this = _super3.call(this);
+    _this.state = {
+      issues: []
+    };
+    return _this;
+  }
+
+  _createClass(IssueTable, [{
+    key: "loadData",
+    value: function loadData() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.setState({
+          issues: initialIssues
+        });
+      }, 5000);
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadData();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var issueRows = this.state.issues.map(function (issue) {
         return /*#__PURE__*/React.createElement(IssueRow, {
           key: issue.id,
-          rowStyle: rowStyle,
           issue: issue
         });
       });
@@ -93,28 +136,6 @@ var IssueTable = /*#__PURE__*/function (_React$Component2) {
   }]);
 
   return IssueTable;
-}(React.Component);
-
-var IssueRow = /*#__PURE__*/function (_React$Component3) {
-  _inherits(IssueRow, _React$Component3);
-
-  var _super3 = _createSuper(IssueRow);
-
-  function IssueRow() {
-    _classCallCheck(this, IssueRow);
-
-    return _super3.apply(this, arguments);
-  }
-
-  _createClass(IssueRow, [{
-    key: "render",
-    value: function render() {
-      var issue = this.props.issue;
-      return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.title));
-    }
-  }]);
-
-  return IssueRow;
 }(React.Component);
 
 var IssueAdd = /*#__PURE__*/function (_React$Component4) {
