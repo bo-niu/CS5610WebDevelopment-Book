@@ -41,7 +41,7 @@ var initialIssues = [{
 }];
 var sampleIssue = {
   status: 'New',
-  ownerL: 'Pieta',
+  owner: 'Pieta',
   title: 'Completion date should be optional'
 };
 
@@ -217,7 +217,7 @@ var IssueList = /*#__PURE__*/function (_React$Component3) {
 
 function IssueRow(props) {
   var issue = props.issue;
-  return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, issue.id), /*#__PURE__*/React.createElement("th", null, issue.status), /*#__PURE__*/React.createElement("th", null, issue.owner), /*#__PURE__*/React.createElement("th", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("th", null, issue.effort), /*#__PURE__*/React.createElement("th", null, issue.due ? issue.due.toDateString() : ''), /*#__PURE__*/React.createElement("th", null, issue.title));
+  return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due ? issue.due.toDateString() : ''), /*#__PURE__*/React.createElement("td", null, issue.title));
 }
 
 function IssueTable(props) {

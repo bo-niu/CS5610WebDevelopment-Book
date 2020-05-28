@@ -13,7 +13,7 @@ const initialIssues = [
 
 const sampleIssue = {
     status: 'New',
-    ownerL: 'Pieta',
+    owner: 'Pieta',
     title: 'Completion date should be optional',
 };
 
@@ -148,15 +148,15 @@ function IssueRow(props) {
     const issue = props.issue;
     return (
         <tr>
-            <th>{issue.id}</th>
-            <th>{issue.status}</th>
-            <th>{issue.owner}</th>
-            <th>{issue.created.toDateString()}</th>
-            <th>{issue.effort}</th>
-            <th>{issue.due ? issue.due.toDateString() : ''}</th>
-            <th>{issue.title}</th>
+            <td>{issue.id}</td>
+            <td>{issue.status}</td>
+            <td>{issue.owner}</td>
+            <td>{issue.created.toDateString()}</td>
+            <td>{issue.effort}</td>
+            <td>{issue.due ? issue.due.toDateString() : ''}</td>
+            <td>{issue.title}</td>
         </tr>
-    )
+    );
 }
 
 function IssueTable(props) {
