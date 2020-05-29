@@ -1,6 +1,17 @@
 # BoNiu-Book
 Work through Pro MERN Stack 2nd Ed
 
+## Chapter 4
+### Summary
+In this chapter, I learned how to use state and make changes to it on user interactions or other events. In this chapter, I think the most important thing is to understand how different components communicate with each other.
+
+Parents communicate to children via `props`; when state changes, the props automatically change. Children communicate to parents via `callbacks`.
+
+For example, In the author's codes, while initializing, the `<IssueTable issues={this.state.issues}/>` in the IssueList set props to its child IssueTable, this is called communication via `props`.
+
+Whild user click the add button to add a new issue, the IssueAdd class's `handleSubmit(e)` get called and inside this function called `this.props.createIssue(issue)` where createIssue came from its parent `IssueList`. This is called communication via `callbacks`.
+
+![Ch4 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter4.png)
 
 ## Chapter 3
 
