@@ -1,7 +1,0 @@
-type Query {
-    about: String!
-}
-
-type Mutation {
-    stAboutMessage(message: String!): String
-}
