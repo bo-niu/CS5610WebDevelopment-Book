@@ -1,6 +1,17 @@
 # BoNiu-Book
 Work through Pro MERN Stack 2nd Ed
 
+## Chapter 5
+### Summary
+
+In this chapter, I integrated `GraphQL` into the project. GraphQL is a more powerful, advanced and easy to use tool compared with `REST`, because GraphQL creatively makes use of the feature of graph to avoid the redundant data that user does not want if using REST. In this project, GraphQL acts as a `middleware` in the server side, where middleware is a router who diverges requests from the client side. GraphQL has it own syntax for CRUD operations, just like another type of SQL language. Besides, to use that in Node.js and front-end javascript, one has to get familiar with its javascript API. 
+
+And also, since GraphQL works for the communication between the server side and the client side, the async feature of the javascript came to use in this chapter. After finishing this chapter, I practiced the async, await keyword in javascript.
+
+Overall, this chapter is heavier than the previous chapter and I think I need some more time to get fully understand all the contents in this chapter.
+
+![Ch5 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter5.png)
+
 ## Chapter 4
 ### Summary
 In this chapter, I learned how to use state and make changes to it on user interactions or other events. In this chapter, I think the most important thing is to understand how different components communicate with each other.
