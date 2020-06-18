@@ -1,4 +1,15 @@
+const {MongoClient} = require('mongodb');
 
+const url = 'mongodb://localhost/issuetracker';
+
+let db;
+
+async function connectToDb() {
+    const client = new MongoClient(url, {useNewUrlParser: true});
+    await client.connect();
+    console.log('Connected to MongoDB at', url);
+    db = client.db();
+}
 
 const express = require('express');
 const {ApolloServer, UserInputError} = require('apollo-server-express');
@@ -77,8 +88,16 @@ function issueValidate(issue) {
     }
 }
 
-function issueList() {
-    return issuesDB;
+async function issueList() {
+    const issues = await db.collection('issues').find({}).toArray();
+    return issues;
+}
+
+async function connectToDb() {
+    const client = new MongoClient(url, {useNewUrlParser: true});
+    await client.connect();
+    console.log('Connected to MongoDB at', url);
+    db = client.db();
 }
 
 function setAboutMessage(_, {message}) {
@@ -101,6 +120,17 @@ app.use(express.static('public'));
 
 server.applyMiddleware({app, path: '/graphql'});
 
-app.listen(3000, function(){
-    console.log('App started on port 3000');
-});
+// app.listen(3000, function(){
+//     console.log('App started on port 3000');
+// });
+
+(async function() {
+    try {
+        await connectToDb();
+        app.listen(3000, function() {
+            console.log('App started on port 3000');
+        });
+    } catch (err) {
+        console.log('ERROR:', err);
+    }
+})();
