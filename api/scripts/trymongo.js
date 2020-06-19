@@ -1,10 +1,5 @@
-const url = 'mongodb://localhost/issuetracker';
+const url = process.env.DB_URL || 'mongodb://localhost/issuetracker';
 const {MongoClient} = require('mongodb');
-// Atlas URL - replace UUU with user, PPP with password, XXX with hostname 
-// const url = 'mongodb+srv://UUU:PPP@cluster0-XXX.mongodb.net/issuetracker?retryWrites=true';
-
-// mLab URL - replace UUU with user, PPP with password, XXX with hostname
-// const url = 'mongodb://UUU:PPP@XXX.mlab.com:33533/issuetracker';
 
 function testWithCallbacks(callback) {
     console.log('\n--- testWithCallbacks ---');
@@ -15,7 +10,7 @@ function testWithCallbacks(callback) {
             callback(err);
             return;
         }
-        console.log('Connect to MongoDB');
+        console.log('Connect to MongoDB URL', url);
     
         const db = client.db();
         const collection = db.collection('employees');
@@ -47,7 +42,7 @@ async function testWithAsync() {
     const client = new MongoClient(url, {useNewUrlParser: true, useUnifiedTopology: true});
     try {
         await client.connect();
-        console.log('Connect to MongoDB');
+        console.log('Connect to MongoDB URL', url);
         const db = client.db();
         const collection = db.collection('employees');
 

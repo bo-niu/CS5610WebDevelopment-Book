@@ -1,6 +1,12 @@
 const {MongoClient} = require('mongodb');
 
-const url = 'mongodb://localhost/issuetracker';
+
+const fs = require('fs');
+require('dotenv').config();
+
+const url = process.env.DB_URL || 'mongodb://localhost/issuetracker';
+
+const port = process.env.API_SERVER_PORT || 3000;
 
 let db;
 
@@ -51,8 +57,6 @@ const issuesDB = [
         title: 'Missing bottom borderon panel',
     }
 ];
-
-const fs = require('fs');
 
 const resolvers = {
     Query: {
@@ -138,8 +142,8 @@ server.applyMiddleware({app, path: '/graphql'});
 (async function() {
     try {
         await connectToDb();
-        app.listen(3000, function() {
-            console.log('API server started on port 3000');
+        app.listen(port, function() {
+            console.log(`API server started on port ${port}`);
         });
     } catch (err) {
         console.log('ERROR:', err);
