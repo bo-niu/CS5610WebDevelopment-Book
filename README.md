@@ -1,6 +1,21 @@
 # BoNiu-Book
 Work through Pro MERN Stack 2nd Ed
 
+## Chapter 6
+
+### Summary
+
+In this chapter, I learned the usage of MongoDB. MongoDB has collections corresponding to the tables in SQL based database. MongoDB uses mongo shell to perform CRUD operation which is very much like javascript corresponding to the sql language in relational database. Besides the mongo shell, the MongoDB Nodejs Driver provides another interface to operate on MongoDB. Therefore, the logic of integrating MongoDB into our project is to firstly install mongodb nodejs driver, then write a seperate JS code file to initialize the mongodb. Everytime we want to initialize the mongodb, we run this js code. Finally in the project, we move the previous in-memory data to the database.
+
+I need to spend more time to get familiar with all commonly used operations of MongoDB by practice.
+
+### Useful Resources
+
+MongoDB Cheat Sheet:
+
+[Click Me!](https://gist.github.com/bradtraversy/f407d642bdc3b31681bc7e56d95485b6)
+
+![Ch6 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter6.png)
 ## Chapter 5
 ### Summary
 
