@@ -26,12 +26,20 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+/* eslint "react/react-in-jsx-scope: "off" */
+
+/* globals React ReactDOM */
+
+/* eslint "react/jsx-no-undef": "off" */
+
+/* eslint "no-alert": "off" */
 var dateRegex = new RegExp('^\\d\\d\\d\\d-\\d\\d-\\d\\d');
 
 function jsonDateReviver(key, value) {
   if (dateRegex.test(value)) return new Date(value);
   return value;
-}
+} // eslint-disable-next-line react/prefer-stateless-function
+
 
 var IssueFilter = /*#__PURE__*/function (_React$Component) {
   _inherits(IssueFilter, _React$Component);
@@ -52,47 +60,7 @@ var IssueFilter = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return IssueFilter;
-}(React.Component); // class IssueRow extends React.Component {
-//     render() {
-//         const issue = this.props.issue;
-//         return (
-//             <tr>
-//                 <td>{issue.id}</td>
-//                 <td>{issue.status}</td>
-//                 <td>{issue.owner}</td>
-//                 <td>{issue.created.toDateString()}</td>
-//                 <td>{issue.effort}</td>
-//                 <td>{issue.due ? issue.due.toDateString() : ''}</td>
-//                 <td>{issue.title}</td>
-//             </tr>
-//         );
-//     }
-// }
-// class IssueTable extends React.Component {
-//     render() {
-//         const issueRows = this.props.issues.map(issue => <IssueRow key={issue.id} issue={issue} />)
-//         const rowStyle = {border: "1px solid silver", padding: 4};
-//         return (
-//             <table className = "bordered-table">
-//                 <thead>
-//                     <tr>
-//                         <th>ID</th>
-//                         <th>Status</th>
-//                         <th>Owner</th>
-//                         <th>Created</th>
-//                         <th>Effort</th>
-//                         <th>Due Date</th>
-//                         <th>Title</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     {issueRows}
-//                 </tbody>
-//             </table>
-//         );
-//     }
-// }
-
+}(React.Component);
 
 var IssueAdd = /*#__PURE__*/function (_React$Component2) {
   _inherits(IssueAdd, _React$Component2);
@@ -123,7 +91,9 @@ var IssueAdd = /*#__PURE__*/function (_React$Component2) {
         type: "text",
         name: "title",
         placeholder: "Title"
-      }), /*#__PURE__*/React.createElement("button", null, "Add"));
+      }), /*#__PURE__*/React.createElement("button", {
+        type: "submit"
+      }, "Add"));
     }
   }, {
     key: "handleSubmit",
@@ -136,9 +106,10 @@ var IssueAdd = /*#__PURE__*/function (_React$Component2) {
         status: 'New',
         due: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 10)
       };
-      this.props.createIssue(issue);
-      form.owner.value = "";
-      form.title.value = "";
+      var createIssue = this.props.createIssue;
+      createIssue(issue);
+      form.owner.value = '';
+      form.title.value = '';
     }
   }]);
 
@@ -188,7 +159,7 @@ function _graphQLFetch() {
             if (result.errors) {
               error = result.errors[0];
 
-              if (error.extensions.code == 'BAD_USER_INPUT') {
+              if (error.extensions.code === 'BAD_USER_INPUT') {
                 details = error.extensions.exception.errors.join('\n ');
                 alert("".concat(error.message, ":\n ").concat(details));
               } else {
@@ -202,8 +173,9 @@ function _graphQLFetch() {
             _context3.prev = 13;
             _context3.t0 = _context3["catch"](1);
             alert("Error in sending data to server: ".concat(_context3.t0.message));
+            return _context3.abrupt("return", null);
 
-          case 16:
+          case 17:
           case "end":
             return _context3.stop();
         }
@@ -245,7 +217,7 @@ var IssueList = /*#__PURE__*/function (_React$Component3) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                query = "query {\n            issueList {\n                id title status owner\n                created effort due\n            }\n        }"; // const response = await fetch('/graphql', {
+                query = "query {\n      issueList {\n        id title status owner\n        created effort due\n      }\n    }"; // const response = await fetch('/graphql', {
                 //     method: 'POST',
                 //     headers: {'Content-type': 'application/json'},
                 //     body: JSON.stringify({query})
@@ -294,7 +266,7 @@ var IssueList = /*#__PURE__*/function (_React$Component3) {
                 // const newIssueList = this.state.issues.slice();
                 // newIssueList.push(issue);
                 // this.setState({issues: newIssueList});
-                query = "mutation issueAdd($issue: IssueInputs!) {\n            issueAdd(issue: $issue){\n                id\n            }\n        }"; // const response = await fetch('/graphql', {
+                query = "mutation issueAdd($issue: IssueInputs!) {\n      issueAdd(issue: $issue){\n        id\n      }\n    }"; // const response = await fetch('/graphql', {
                 //     method: 'POST',
                 //     headers: {'Content-Type': 'application/json'},
                 //     body: JSON.stringify( { query, variables: { issue } } )
@@ -330,8 +302,9 @@ var IssueList = /*#__PURE__*/function (_React$Component3) {
   }, {
     key: "render",
     value: function render() {
+      var issues = this.state.issues;
       return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Issue Tracker"), /*#__PURE__*/React.createElement(IssueFilter, null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueTable, {
-        issues: this.state.issues
+        issues: issues
       }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(IssueAdd, {
         createIssue: this.createIssue
       }));
@@ -341,13 +314,14 @@ var IssueList = /*#__PURE__*/function (_React$Component3) {
   return IssueList;
 }(React.Component);
 
-function IssueRow(props) {
-  var issue = props.issue;
+function IssueRow(_ref) {
+  var issue = _ref.issue;
   return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, issue.id), /*#__PURE__*/React.createElement("td", null, issue.status), /*#__PURE__*/React.createElement("td", null, issue.owner), /*#__PURE__*/React.createElement("td", null, issue.created.toDateString()), /*#__PURE__*/React.createElement("td", null, issue.effort), /*#__PURE__*/React.createElement("td", null, issue.due ? issue.due.toDateString() : ' '), /*#__PURE__*/React.createElement("td", null, issue.title));
 }
 
-function IssueTable(props) {
-  var issueRows = props.issues.map(function (issue) {
+function IssueTable(_ref2) {
+  var issues = _ref2.issues;
+  var issueRows = issues.map(function (issue) {
     return /*#__PURE__*/React.createElement(IssueRow, {
       key: issue.id,
       issue: issue
