@@ -1,6 +1,16 @@
 # BoNiu-Book
 Work through Pro MERN Stack 2nd Ed
 
+## Chapter 7
+
+### Summary
+
+In this chapter, we made a big architectural change by separating the UI and the API servers. The implications of CORS is discussed in this chapter and we coded an optioon for dealing with it using a proxy. The architecture is shown on the image below. Also, I learned how to make the application configurable for different deployment environments like staging and production. Finally, in order to make the development work more convenient, we integrate the ESLint to take care of our coding standards and validation. After working on fixing the ESLint warnings and errors for so long, I find the tool so powerful.
+
+![Ch7 Architecture Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter7-architecture.png)
+
+![Ch7 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter7.png)
+
 ## Chapter 6
 
 ### Summary
