@@ -1,4 +1,7 @@
 # BoNiu-Book
+
+Hi, this is the Issue Tracker project on the book [Pro MERN Stack Full Stack Web App Development with Mongo, Express, React, and Node 2nd Edition](https://www.apress.com/gp/book/9781484243909) by Vasan Subramanian. The contents below shows my progress and summary on the project.
+
 Work through Pro MERN Stack 2nd Ed
 
 ## Chapter 7
