@@ -4,6 +4,16 @@ Hi, this is the Issue Tracker project on the book [Pro MERN Stack Full Stack Web
 
 Work through Pro MERN Stack 2nd Ed
 
+## Chapter 8
+
+### Summary
+
+In this chapter, I break the front-end codes and back-end codes into modules to make codes more clear. Since JavaScript was not originally designed for modularity, we needed the tool Webpack to put together and generate a new bundles from a handful of small JavaScript files and React components.Webpack helped resolve dependencies and create bundles for each modules so that we can remove the dependency on the CDN for runtime libraries.
+
+The rest of the chapter is the HMR(Hot Module Replacement) for providing convenience for our development and debugging.
+
+![Ch8 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter8.png)
+
 ## Chapter 7
 
 ### Summary
