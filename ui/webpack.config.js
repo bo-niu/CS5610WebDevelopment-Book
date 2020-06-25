@@ -24,10 +24,10 @@ module.exports = {
       chunks: 'all',
     },
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      __UI_API_ENDPOINT__: `'${process.env.UI_API_ENDPOINT}'`,
-    })
-  ],
+  // plugins: [
+  //   new webpack.DefinePlugin({
+  //     __UI_API_ENDPOINT__: `'${process.env.UI_API_ENDPOINT}'`,
+  //   })
+  // ],
   devtool: 'source-map'
 };
