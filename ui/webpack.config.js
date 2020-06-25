@@ -1,6 +1,6 @@
 const path = require('path');
-const webpack = require('webpack');
-require('dotenv').config();
+// const webpack = require('webpack');
+// require('dotenv').config();
 
 module.exports = {
   mode: 'development',
@@ -13,7 +13,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: '/node_modules/',
+        exclude: /node_modules/,
         use: 'babel-loader',
       },
     ],
@@ -29,5 +29,5 @@ module.exports = {
   //     __UI_API_ENDPOINT__: `'${process.env.UI_API_ENDPOINT}'`,
   //   })
   // ],
-  devtool: 'source-map'
+  devtool: 'source-map',
 };
