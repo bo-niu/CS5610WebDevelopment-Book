@@ -4,6 +4,16 @@ Hi, this is the Issue Tracker project on the book [Pro MERN Stack Full Stack Web
 
 Work through Pro MERN Stack 2nd Ed
 
+## Chapter 9
+
+### Summary
+
+In this chapter, I integrated React Router, which is a client-side routing instead of server-side routing. It is used to show different pages depending on links in a menu or a navigation bar. After learning this chapter, I think the client-side routing is much complicated than the server-side routing, at least server-side routing in the previous chapters. Then I learned how to connect the URL in the browser with what is shown in the page, and how parameters and query strings can be used to tweak the page contents. 
+
+However, as a beginner of web development, after finishing all the codes in this chapter, I still find a little confused by the react routing process, especially in the part of how the parameter is being sent through the routing process and the whole implementation. I need to go through the whole chapter for more times and look for some other materials to review.
+
+![Ch9 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter9.png)
+
 ## Chapter 8
 
 ### Summary
