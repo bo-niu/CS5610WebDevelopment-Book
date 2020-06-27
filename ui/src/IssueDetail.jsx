@@ -37,7 +37,7 @@ export default class IssueDetail extends React.Component {
   }
 
   render() {
-    const { issue: {description} } = this.state;
+    const { issue: { description } } = this.state;
     return (
       <div>
         <h3>Description</h3>

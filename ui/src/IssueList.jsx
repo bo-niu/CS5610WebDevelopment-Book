@@ -23,8 +23,8 @@ export default class IssueList extends React.Component {
 
   componentDidUpdate(prevProps) {
     // console.log("enter issueList componentDidUpdate");
-    const { location: {search: prevSearch } } = prevProps;
-    const { location: {search } } = this.props;
+    const { location: { search: prevSearch } } = prevProps;
+    const { location: { search } } = this.props;
     if (prevSearch !== search) {
       this.loadData();
     }
@@ -73,7 +73,7 @@ export default class IssueList extends React.Component {
         <IssueTable issues={issues} />
         <hr />
         <IssueAdd createIssue={this.createIssue} />
-        <hr/>
+        <hr />
         <Route path={`${match.path}/:id`} component={IssueDetail} />
       </React.Fragment>
     );
