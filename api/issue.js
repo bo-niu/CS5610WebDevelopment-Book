@@ -22,18 +22,6 @@ async function list(_, { status, effortMin, effortMax }) {
   return issues;
 }
 
-async function update(_, { id, changes }) {
-  const db = getDb();
-  if (changes.title || changes.status || changes.owner) {
-    const issue = await db.collection('issues').findOne({ id });
-    Object.assign(issue, changes);
-    validate(issue);
-  }
-  await db.collection('issues').updateOne({ id }, { $set: changes });
-  const saveIssue = await db.collection('issues').findOne({ id });
-  return savedIssue;
-}
-
 function validate(issue) {
   const errors = [];
   if (issue.title.length < 3) {
@@ -45,6 +33,18 @@ function validate(issue) {
   if (errors.length > 0) {
     throw new UserInputError('Invalid input(s)', { errors });
   }
+}
+
+async function update(_, { id, changes }) {
+  const db = getDb();
+  if (changes.title || changes.status || changes.owner) {
+    const issue = await db.collection('issues').findOne({ id });
+    Object.assign(issue, changes);
+    validate(issue);
+  }
+  await db.collection('issues').updateOne({ id }, { $set: changes });
+  const savedIssue = await db.collection('issues').findOne({ id });
+  return savedIssue;
 }
 
 async function add(_, { issue }) {
