@@ -4,6 +4,16 @@ Hi, this is the Issue Tracker project on the book [Pro MERN Stack Full Stack Web
 
 Work through Pro MERN Stack 2nd Ed
 
+## Chapter 10
+
+### Summary
+
+In this chapter, we entered an intense workload. This chapter performed a great database operation and React interaction. We used the Edit page to explore forms and look at the difference between controlled and uncontrolled form components. Things that need to review are how we designed the reuseable React components including the DateInput, NumInput, TextInput Classes. Also, we had a good practice on the graphQL and mongoDB operation, which I need to review and practive more times. 
+
+![Ch10-1 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter10-1.png)
+
+![Ch10-2 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter10-2.png)
+
 ## Chapter 9
 
 ### Summary
