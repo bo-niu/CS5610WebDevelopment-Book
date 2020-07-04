@@ -5,7 +5,6 @@ import { Panel } from 'react-bootstrap';
 
 import IssueFilter from './IssueFilter.jsx';
 import IssueTable from './IssueTable.jsx';
-import IssueAdd from './IssueAdd.jsx';
 import graphQLFetch from './graphQLFetch.js';
 import IssueDetail from './IssueDetail.jsx';
 import Toast from './Toast.jsx';
@@ -20,7 +19,7 @@ export default class IssueList extends React.Component {
       toastMessage: '',
       toastType: 'info',
     };
-    this.createIssue = this.createIssue.bind(this);
+    // this.createIssue = this.createIssue.bind(this);
     this.closeIssue = this.closeIssue.bind(this);
     this.deleteIssue = this.deleteIssue.bind(this);
     this.showSuccess = this.showSuccess.bind(this);
@@ -74,18 +73,18 @@ export default class IssueList extends React.Component {
     }
   }
 
-  async createIssue(issue) {
-    const query = `mutation issueAdd($issue: IssueInputs!) {
-      issueAdd(issue: $issue){
-        id
-      }
-    }`;
+  // async createIssue(issue) {
+  //   const query = `mutation issueAdd($issue: IssueInputs!) {
+  //     issueAdd(issue: $issue){
+  //       id
+  //     }
+  //   }`;
 
-    const data = await graphQLFetch(query, { issue }, this.showError);
-    if (data) {
-      this.loadData();
-    }
-  }
+  //   const data = await graphQLFetch(query, { issue }, this.showError);
+  //   if (data) {
+  //     this.loadData();
+  //   }
+  // }
 
   async closeIssue(index) {
     const query = `mutation issueClose($id: Int!) {
@@ -165,7 +164,7 @@ export default class IssueList extends React.Component {
           closeIssue={this.closeIssue}
           deleteIssue={this.deleteIssue}
         />
-        <IssueAdd createIssue={this.createIssue} />
+        {/* <IssueAdd createIssue={this.createIssue} /> */}
         <Route path={`${match.path}/:id`} component={IssueDetail} />
         <Toast
           showing={toastVisible}
