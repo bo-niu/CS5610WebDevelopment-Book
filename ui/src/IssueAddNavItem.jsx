@@ -13,9 +13,6 @@ class IssueAddNavItem extends React.Component {
     super(props);
     this.state = {
       showing: false,
-      toastVisible: false,
-      toastMessage: '',
-      toastType: 'success',
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
@@ -45,7 +42,7 @@ class IssueAddNavItem extends React.Component {
     }`;
 
     const { showError } = this.props;
-    const data = await graphQLFetch(query, { issue }, this.showError);
+    const data = await graphQLFetch(query, { issue }, showError);
     if (data) {
       const { history } = this.props;
       history.push(`/edit/${data.issueAdd.id}`);
