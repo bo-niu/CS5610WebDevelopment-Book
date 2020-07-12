@@ -14,7 +14,7 @@ export default async function graphQLFetch(query, variables = {}, showError = nu
   try {
     const response = await fetch(apiEndpoint, {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query, variables }),
     });
     const body = await response.text();
@@ -32,6 +32,6 @@ export default async function graphQLFetch(query, variables = {}, showError = nu
     return result.data;
   } catch (e) {
     if (showError) showError(`Error in sending data to server: ${e.message}`);
+    return null;
   }
-  return null;
 }
