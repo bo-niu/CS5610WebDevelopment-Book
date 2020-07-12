@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "730b4b6670c9ac8a350a";
+/******/ 	var hotCurrentHash = "127d101be475a725d592";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1013,7 +1013,8 @@ async function render(req, res) {
   let initialData;
 
   if (activeRoute && activeRoute.component.fetchData) {
-    initialData = await activeRoute.component.fetchData();
+    const match = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["matchPath"])(req.path, activeRoute);
+    initialData = await activeRoute.component.fetchData(match);
   }
 
   _src_store_js__WEBPACK_IMPORTED_MODULE_5__["default"].initialData = initialData;
@@ -1039,6 +1040,9 @@ async function render(req, res) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return template; });
+/* harmony import */ var serialize_javascript__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! serialize-javascript */ "serialize-javascript");
+/* harmony import */ var serialize_javascript__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(serialize_javascript__WEBPACK_IMPORTED_MODULE_0__);
+
 function template(body, data) {
   return `<!DOCTYPE HTML>
   <html>
@@ -1056,7 +1060,7 @@ function template(body, data) {
     <body>
       <!-- Page generated from template. -->
       <div id="content">${body}</div>
-      <script>window.__INITIAL_DATA__ = ${JSON.stringify(data)}</script>
+      <script>window.__INITIAL_DATA__ = ${serialize_javascript__WEBPACK_IMPORTED_MODULE_0___default()(data)}</script>
       <script src="/env.js"></script>
       <script src="/vendor.bundle.js"></script>
       <script src="/app.bundle.js"></script>
@@ -1130,7 +1134,7 @@ if (!process.env.UI_API_ENDPOINT) {
 }
 
 if (!process.env.UI_SERVER_API_ENDPOINT) {
-  process.env.UI_API_ENDPOINT = process.env.UI_API_ENDPOINT;
+  process.env.UI_SERVER_API_ENDPOINT = process.env.UI_API_ENDPOINT;
 }
 
 app.get('/env.js', (req, res) => {
@@ -1180,6 +1184,7 @@ class About extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(props) {
     super(props);
     const apiAbout = _store_js__WEBPACK_IMPORTED_MODULE_1__["default"].initialData ? _store_js__WEBPACK_IMPORTED_MODULE_1__["default"].initialData.about : null;
+    delete _store_js__WEBPACK_IMPORTED_MODULE_1__["default"].initialData;
     this.state = {
       apiAbout
     };
@@ -1628,6 +1633,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DateInput_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DateInput.jsx */ "./src/DateInput.jsx");
 /* harmony import */ var _TextInput_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TextInput.jsx */ "./src/TextInput.jsx");
 /* harmony import */ var _Toast_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Toast.jsx */ "./src/Toast.jsx");
+/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store.js */ "./src/store.js");
+
 
 
 
@@ -1638,10 +1645,30 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class IssueEdit extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  static async fetchData(match, showError) {
+    const query = `query issue($id: Int!) {
+      issue(id: $id) {
+        id title status owner
+        effort created due description
+      }
+    }`;
+    const {
+      params: {
+        id
+      }
+    } = match;
+    const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_4__["default"])(query, {
+      id
+    }, showError);
+    return result;
+  }
+
   constructor() {
     super();
+    const issue = _store_js__WEBPACK_IMPORTED_MODULE_9__["default"].initialData ? _store_js__WEBPACK_IMPORTED_MODULE_9__["default"].initialData.issue : null;
+    delete _store_js__WEBPACK_IMPORTED_MODULE_9__["default"].initialData;
     this.state = {
-      issue: {},
+      issue,
       invalidFields: {},
       showingValidation: false,
       toastVisible: false,
@@ -1657,7 +1684,10 @@ class IssueEdit extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   }
 
   componentDidMount() {
-    this.loadData();
+    const {
+      issue
+    } = this.state;
+    if (issue == null) this.loadData();
   }
 
   componentDidUpdate(prevProps) {
@@ -1748,23 +1778,10 @@ class IssueEdit extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   }
 
   async loadData() {
-    const query = `query issue($id: Int!) {
-      issue(id: $id) {
-        id title status owner
-        effort created due description
-      }
-    }`;
     const {
-      match: {
-        params: {
-          id
-        }
-      }
+      match
     } = this.props;
-    const data = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_4__["default"])(query, {
-      id: parseInt(id, 10)
-    }, this.showError); // const data = await graphQLFetch(query, { id });
-
+    const data = await IssueEdit.fetchData(match, this.showError);
     this.setState({
       issue: data ? data.issue : {},
       invalidFields: {}
@@ -1806,6 +1823,10 @@ class IssueEdit extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   }
 
   render() {
+    const {
+      issue
+    } = this.state;
+    if (issue == null) return null;
     const {
       issue: {
         id
@@ -3174,6 +3195,17 @@ module.exports = require("react-router-bootstrap");
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-dom");
+
+/***/ }),
+
+/***/ "serialize-javascript":
+/*!***************************************!*\
+  !*** external "serialize-javascript" ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("serialize-javascript");
 
 /***/ }),
 

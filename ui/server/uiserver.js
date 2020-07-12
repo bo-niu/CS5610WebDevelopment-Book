@@ -42,7 +42,7 @@ if (!process.env.UI_API_ENDPOINT) {
 }
 
 if (!process.env.UI_SERVER_API_ENDPOINT) {
-  process.env.UI_API_ENDPOINT = process.env.UI_API_ENDPOINT;
+  process.env.UI_SERVER_API_ENDPOINT = process.env.UI_API_ENDPOINT;
 }
 
 app.get('/env.js', (req, res) => {
