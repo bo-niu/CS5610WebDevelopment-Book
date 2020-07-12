@@ -32,6 +32,6 @@ export default async function graphQLFetch(query, variables = {}, showError = nu
     return result.data;
   } catch (e) {
     if (showError) showError(`Error in sending data to server: ${e.message}`);
-    return null;
   }
+  return null;
 }

@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e2a17d75ab61b98b0b12";
+/******/ 	var hotCurrentHash = "252570fe73eae695c9c6";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1020,11 +1020,19 @@ async function render(req, res) {
   }
 
   _src_store_js__WEBPACK_IMPORTED_MODULE_5__["default"].initialData = initialData;
+  const context = {};
   const element = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["StaticRouter"], {
     location: req.url,
-    context: {}
+    context: context
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_Page_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null));
   const body = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default.a.renderToString(element);
+
+  if (context.url) {
+    res.redirect(301, context.url);
+  } else {
+    res.send(Object(_template_js__WEBPACK_IMPORTED_MODULE_3__["default"])(body, initialData));
+  }
+
   res.send(Object(_template_js__WEBPACK_IMPORTED_MODULE_3__["default"])(body, initialData));
 }
 
@@ -1239,7 +1247,11 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 
 function Contents() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, _routes_js__WEBPACK_IMPORTED_MODULE_2__["default"].map(attrs => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], _extends({}, attrs, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+    exact: true,
+    from: "/",
+    to: "/issues"
+  }), _routes_js__WEBPACK_IMPORTED_MODULE_2__["default"].map(attrs => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], _extends({}, attrs, {
     key: attrs.path
   }))));
 }
@@ -2865,8 +2877,9 @@ async function graphQLFetch(query, variables = {}, showError = null) {
     return result.data;
   } catch (e) {
     if (showError) showError(`Error in sending data to server: ${e.message}`);
-    return null;
   }
+
+  return null;
 }
 
 /***/ }),
