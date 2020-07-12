@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap';
 
 import graphQLFetch from './graphQLFetch.js';
-import Toast from './Toast.jsx';
+import withToast from './withToast.jsx';
 
 class IssueAddNavItem extends React.Component {
   constructor(props) {
@@ -19,9 +19,6 @@ class IssueAddNavItem extends React.Component {
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.showError = this.showError.bind(this);
-    this.dismissToast = this.dismissToast.bind(this);
   }
 
   showModal() {
@@ -30,16 +27,6 @@ class IssueAddNavItem extends React.Component {
 
   hideModal() {
     this.setState({ showing: false });
-  }
-
-  showError(message) {
-    this.setState({
-      toastVisible: true, toastMessage: message, toastType: 'danger',
-    });
-  }
-
-  dismissToast() {
-    this.setState({ toastVisible: false });
   }
 
   async handleSubmit(e) {
@@ -57,6 +44,7 @@ class IssueAddNavItem extends React.Component {
       }
     }`;
 
+    const { showError } = this.props;
     const data = await graphQLFetch(query, { issue }, this.showError);
     if (data) {
       const { history } = this.props;
@@ -66,7 +54,6 @@ class IssueAddNavItem extends React.Component {
 
   render() {
     const { showing } = this.state;
-    const { toastVisible, toastMessage, toastType } = this.state;
     return (
       <React.Fragment>
         <NavItem onClick={this.showModal}>
@@ -107,16 +94,9 @@ class IssueAddNavItem extends React.Component {
             </ButtonToolbar>
           </Modal.Footer>
         </Modal>
-        <Toast
-          showing={toastVisible}
-          onDismiss={this.dismissToast}
-          bsStyle={toastType}
-        >
-          {toastMessage}
-        </Toast>
       </React.Fragment>
     );
   }
 }
 
-export default withRouter(IssueAddNavItem);
+export default withToast(withRouter(IssueAddNavItem));
