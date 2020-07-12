@@ -22,7 +22,7 @@ type Issue {
 type IssueCounts {
   owner: String!
   New: Int
-  Assined: Int
+  Assigned: Int
   Fixed: Int
   Closed: Int
 }
