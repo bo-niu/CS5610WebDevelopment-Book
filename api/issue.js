@@ -1,6 +1,6 @@
 const { UserInputError } = require('apollo-server-express');
 const { getDb, getNextSequence } = require('./db.js');
-const { Cursor } = require('mongodb');
+// const { Cursor } = require('mongodb');
 
 async function get(_, { id }) {
   const db = getDb();
@@ -10,7 +10,9 @@ async function get(_, { id }) {
 
 const PAGE_SIZE = 10;
 
-async function list(_, { status, effortMin, effortMax, page }) {
+async function list(_, {
+  status, effortMin, effortMax, page,
+}) {
   const db = getDb();
   const filter = {};
   if (status) filter.status = status;
@@ -84,6 +86,20 @@ async function remove(_, { id }) {
   return false;
 }
 
+async function restore(_, { id }) {
+  const db = getDb();
+  const issue = await db.collection('deleted_issues').findOne({ id });
+  if (!issue) return false;
+  issue.deleted = new Date();
+
+  let result = await db.collection('issues').insertOne(issue);
+  if (result.insertedId) {
+    result = await db.collection('deleted_issues').removeOne({ id });
+    return result.deletedCount === 1;
+  }
+  return false;
+}
+
 async function counts(_, { status, effortMin, effortMax }) {
   const db = getDb();
   const filter = {};
@@ -122,5 +138,6 @@ module.exports = {
   get,
   update,
   delete: remove,
+  restore,
   counts,
 };
