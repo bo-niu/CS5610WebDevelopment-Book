@@ -90,7 +90,7 @@ class IssueReport extends React.Component {
             <Panel.Title toggle>Filter</Panel.Title>
           </Panel.Heading>
           <Panel.Body collapsible>
-            <IssueFilter urlBase="report" />
+            <IssueFilter urlBase="/report" />
           </Panel.Body>
         </Panel>
         <Table bordered condensed hover responsive>

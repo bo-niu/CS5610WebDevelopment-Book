@@ -2,12 +2,13 @@ import React from 'react';
 import {
   Navbar, Nav, NavItem, NavDropdown,
   MenuItem, Glyphicon,
-  Grid,
+  Grid, Col,
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import Contents from './Contents.jsx';
 import IssueAddNavItem from './IssueAddNavItem.jsx';
+import Search from './Search.jsx';
 
 function NavBar() {
   return (
@@ -26,6 +27,12 @@ function NavBar() {
           <NavItem>Report</NavItem>
         </LinkContainer>
       </Nav>
+      <Col sm={5}>
+        <Navbar.Form>
+          <Search />
+        </Navbar.Form>
+      </Col>
+      {/* <Search /> */}
       <Nav pullRight>
         <IssueAddNavItem />
         <NavDropdown
@@ -68,27 +75,3 @@ export default function Page() {
     </div>
   );
 }
-
-// function NavBar() {
-//   return (
-//     <nav>
-//       {/* <a href="/">Home</a> */}
-//       <NavLink exact to="/">Home</NavLink>
-//       {' | '}
-//       {/* <a href="/#/issues">Issue List</a> */}
-//       <NavLink to="/issues">Issue List</NavLink>
-//       {' | '}
-//       {/* <a href="/#/report">Report</a> */}
-//       <NavLink to="/report">Report</NavLink>
-//     </nav>
-//   );
-// }
-
-// export default function Page() {
-//   return (
-//     <div>
-//       <NavBar />
-//       <Contents />
-//     </div>
-//   );
-// }

@@ -13,7 +13,7 @@ import store from './store.js';
 const SECTION_SIZE = 5;
 
 function PageLink({
-  params, page, activePage, children
+  params, page, activePage, children,
 }) {
   params.set('page', page);
   if (page === 0) return React.cloneElement(children, { disabled: true });
@@ -81,10 +81,10 @@ class IssueList extends React.Component {
   constructor() {
     // console.log("enter issueList constructor");
     super();
-    const initialDate = store.initialData || { issueList: {} };
+    const initialData = store.initialData || { issueList: {} };
     const {
       issueList: { issues, pages }, issue: selectedIssue,
-    } = initialDate;
+    } = initialData;
     delete store.initialData;
     this.state = {
       issues,
@@ -116,9 +116,9 @@ class IssueList extends React.Component {
 
   async loadData() {
     const { location: { search }, match, showError } = this.props;
-    const data = await IssueList.fetchData(match, search, this.showError);
+    const data = await IssueList.fetchData(match, search, showError);
     if (data) {
-      this.setState({ 
+      this.setState({
         issues: data.issueList.issues,
         selectedIssue: data.issue,
         pages: data.issueList.pages,
@@ -135,7 +135,7 @@ class IssueList extends React.Component {
     }`;
     const { issues } = this.state;
     const { showError } = this.props;
-    const data = await graphQLFetch(query, { id: issues[index].id }, this.showError);
+    const data = await graphQLFetch(query, { id: issues[index].id }, showError);
     if (data) {
       this.setState((prevState) => {
         const newList = [...prevState.issues];
@@ -155,7 +155,7 @@ class IssueList extends React.Component {
     const { showSuccess, showError } = this.props;
     const { location: { pathname, search }, history } = this.props;
     const { id } = issues[index];
-    const data = await graphQLFetch(query, { id }, this.showError);
+    const data = await graphQLFetch(query, { id }, showError);
     if (data && data.issueDelete) {
       this.setState((prevState) => {
         const newList = [...prevState.issues];
