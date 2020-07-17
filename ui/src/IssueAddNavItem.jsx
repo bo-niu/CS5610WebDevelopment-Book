@@ -16,6 +16,7 @@ class IssueAddNavItem extends React.Component {
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   showModal() {
@@ -51,9 +52,10 @@ class IssueAddNavItem extends React.Component {
 
   render() {
     const { showing } = this.state;
+    const { user: { signedIn } } = this.props;
     return (
       <React.Fragment>
-        <NavItem onClick={this.showModal}>
+        <NavItem disabled={!signedIn} onClick={this.showModal}>
           <OverlayTrigger
             placement="left"
             delayShow={1000}
