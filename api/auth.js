@@ -30,6 +30,11 @@ function getUser(req) {
   }
 }
 
+routes.post('/signout', async (req, res) => {
+  res.clearCookie('jwt');
+  res.json({ status: 'ok' });
+});
+
 routes.post('/signin', async (req, res) => {
   if (!JWT_SECRET) {
     res.status(500).send('Missing JWT_SECRET. Refusing to authenticate');
