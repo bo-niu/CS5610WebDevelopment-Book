@@ -9,6 +9,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Contents from './Contents.jsx';
 import IssueAddNavItem from './IssueAddNavItem.jsx';
 import Search from './Search.jsx';
+import UserContext from './UserContext.js';
 import SignInNavItem from './SignInNavItem.jsx';
 
 function NavBar({ user, onUserChange }) {
@@ -95,7 +96,9 @@ export default class Page extends React.Component {
       <div>
         <NavBar user={user} onUserChange={this.onUserChange} />
         <Grid>
-          <Contents />
+          <UserContext.Provider value={user}>
+            <Contents />
+          </UserContext.Provider>
         </Grid>
         <Footer />
       </div>
