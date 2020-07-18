@@ -4,6 +4,13 @@ Hi, this is the Issue Tracker project on the book [Pro MERN Stack Full Stack Web
 
 Work through Pro MERN Stack 2nd Ed
 
+## Chapter 14
+
+### Summary
+This chapter introduced ways to authenticate users. In this project, we used Google to authenticate a user. I learned how JWT can be used to persist session information in a stateless, yet secure manner. Then, I learned how authorization works with GraphQL APIs and how it can be extended to perform different authorization checks based on the application's needs. I also learned how CORS and cookie handling restrictions on the browser come into play when the browser accesses the APIs directly.
+
+![Ch14 Image](https://github.ccs.neu.edu/NEU-CS5610-SU20/BoNiu-Book/blob/master/readme_images/chapter14.png)
+
 ## Chapter 13
 
 ### Summary
