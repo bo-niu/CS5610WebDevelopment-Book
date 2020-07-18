@@ -94,7 +94,7 @@ class IssueEdit extends React.Component {
     }`;
 
     const { id, created, ...changes } = issue;
-    const { showSuccess, showError } = this.props;
+    const { showSuccess } = this.props;
     const data = await graphQLFetch(query, { changes, id: parseInt(id, 10) }, this.showError);
     if (data) {
       this.setState({ issue: data.issueUpdate });
@@ -103,7 +103,7 @@ class IssueEdit extends React.Component {
   }
 
   async loadData() {
-    const { match, showError } = this.props;
+    const { match } = this.props;
     const data = await IssueEdit.fetchData(match, null, this.showError);
     this.setState({ issue: data ? data.issue : {}, invalidFields: {} });
   }
